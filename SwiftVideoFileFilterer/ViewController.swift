@@ -17,6 +17,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var movieURL: NSURL!
     var timer: NSTimer!
     
+    
+    
+    
+    
+    
+    
     @IBAction func filterVideo(sender: AnyObject) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .SavedPhotosAlbum //.PhotoLibrary
