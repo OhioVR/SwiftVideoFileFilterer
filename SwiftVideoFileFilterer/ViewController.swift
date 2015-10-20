@@ -6,23 +6,18 @@ var urlToFilteredTempVideo = NSURL(fileURLWithPath: "")
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var aButton: UIButton!
-    
     @IBOutlet var progressView: UIProgressView!
-    
     
     let imagePicker = UIImagePickerController()
     var pixellateFilter: GPUImagePixellateFilter!
-    var otherFilter: GPUImageHalftoneFilter!
+    var halfToneFilter: GPUImageHalftoneFilter!
     var movieWriter: GPUImageMovieWriter!
     var movieFile: GPUImageMovie!
     var pathToMovie: String!
     var movieURL: NSURL!
     var timer: NSTimer!
     
-    
-    
-    
-    @IBAction func doSomething(sender: AnyObject) {
+    @IBAction func filterVideo(sender: AnyObject) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .SavedPhotosAlbum //.PhotoLibrary
         imagePicker.mediaTypes = [kUTTypeMovie as String]
@@ -36,8 +31,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         movieFile = GPUImageMovie(URL: pickedMovieUrl)
         pixellateFilter = GPUImagePixellateFilter()
-        otherFilter = GPUImageHalftoneFilter()
-        movieFile.addTarget(otherFilter)
+        halfToneFilter = GPUImageHalftoneFilter()
+        movieFile.addTarget(halfToneFilter)
         
         let tmpdir = NSTemporaryDirectory()
         pathToMovie = "\(tmpdir)output.mov"
@@ -46,7 +41,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         movieURL = NSURL.fileURLWithPath(pathToMovie)
         movieWriter = GPUImageMovieWriter(movieURL: movieURL, size: CGSizeMake(640, 480))
         movieWriter.encodingLiveVideo = false;//https://github.com/BradLarson/GPUImage/issues/1108
-        otherFilter.addTarget(movieWriter)
+        halfToneFilter.addTarget(movieWriter)
         movieWriter.shouldPassthroughAudio = true
         movieFile.audioEncodingTarget = movieWriter
         movieFile.enableSynchronizedEncodingUsingMovieWriter(movieWriter)

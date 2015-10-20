@@ -15,6 +15,17 @@
 		D2890A651BD45D670006D068 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2890A641BD45D670006D068 /* VideoViewController.swift */; };
 		D2BF345B1BD2B4CA003E075A /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BF344C1BD2B2CE003E075A /* GPUImage.framework */; };
 		D2BF345C1BD2B4CA003E075A /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BF344C1BD2B2CE003E075A /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2CCEE301BD5B11A00576C7D /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE261BD5B11A00576C7D /* Icon-40.png */; };
+		D2CCEE311BD5B11A00576C7D /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE271BD5B11A00576C7D /* Icon-40@2x.png */; };
+		D2CCEE321BD5B11A00576C7D /* Icon-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE281BD5B11A00576C7D /* Icon-40@3x.png */; };
+		D2CCEE331BD5B11A00576C7D /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE291BD5B11A00576C7D /* Icon-60@2x.png */; };
+		D2CCEE341BD5B11A00576C7D /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE2A1BD5B11A00576C7D /* Icon-60@3x.png */; };
+		D2CCEE351BD5B11A00576C7D /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE2B1BD5B11A00576C7D /* Icon-76.png */; };
+		D2CCEE361BD5B11A00576C7D /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE2C1BD5B11A00576C7D /* Icon-76@2x.png */; };
+		D2CCEE371BD5B11A00576C7D /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE2D1BD5B11A00576C7D /* Icon-Small.png */; };
+		D2CCEE381BD5B11A00576C7D /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE2E1BD5B11A00576C7D /* Icon-Small@2x.png */; };
+		D2CCEE391BD5B11A00576C7D /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE2F1BD5B11A00576C7D /* Icon-Small@3x.png */; };
+		D2CCEE551BD5C0FB00576C7D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE541BD5C0FB00576C7D /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +76,17 @@
 		D24D075A1BD3DD10009AF95B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D2890A641BD45D670006D068 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		D2BF34431BD2B2CE003E075A /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
+		D2CCEE261BD5B11A00576C7D /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
+		D2CCEE271BD5B11A00576C7D /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
+		D2CCEE281BD5B11A00576C7D /* Icon-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@3x.png"; sourceTree = "<group>"; };
+		D2CCEE291BD5B11A00576C7D /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		D2CCEE2A1BD5B11A00576C7D /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
+		D2CCEE2B1BD5B11A00576C7D /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		D2CCEE2C1BD5B11A00576C7D /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		D2CCEE2D1BD5B11A00576C7D /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		D2CCEE2E1BD5B11A00576C7D /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		D2CCEE2F1BD5B11A00576C7D /* Icon-Small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@3x.png"; sourceTree = "<group>"; };
+		D2CCEE541BD5C0FB00576C7D /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +104,8 @@
 		BC73FD1519612C19004A9191 = {
 			isa = PBXGroup;
 			children = (
-				D24D075A1BD3DD10009AF95B /* Default-568h@2x.png */,
+				D2CCEE541BD5C0FB00576C7D /* Launch Screen.storyboard */,
+				D2CCEE251BD5B10400576C7D /* icons */,
 				BC73FD2019612C19004A9191 /* SwiftVideoFileFilterer */,
 				BC73FD1F19612C19004A9191 /* Products */,
 				D2BF34431BD2B2CE003E075A /* GPUImage.xcodeproj */,
@@ -127,6 +150,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D2CCEE251BD5B10400576C7D /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				D24D075A1BD3DD10009AF95B /* Default-568h@2x.png */,
+				D2CCEE271BD5B11A00576C7D /* Icon-40@2x.png */,
+				D2CCEE281BD5B11A00576C7D /* Icon-40@3x.png */,
+				D2CCEE291BD5B11A00576C7D /* Icon-60@2x.png */,
+				D2CCEE261BD5B11A00576C7D /* Icon-40.png */,
+				D2CCEE2A1BD5B11A00576C7D /* Icon-60@3x.png */,
+				D2CCEE2B1BD5B11A00576C7D /* Icon-76.png */,
+				D2CCEE2C1BD5B11A00576C7D /* Icon-76@2x.png */,
+				D2CCEE2D1BD5B11A00576C7D /* Icon-Small.png */,
+				D2CCEE2E1BD5B11A00576C7D /* Icon-Small@2x.png */,
+				D2CCEE2F1BD5B11A00576C7D /* Icon-Small@3x.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,7 +198,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = "Sunset Lake Software";
+				ORGANIZATIONNAME = "Scott Yannitell";
 				TargetAttributes = {
 					BC73FD1D19612C19004A9191 = {
 						CreatedOnToolsVersion = 6.0;
@@ -210,9 +251,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2CCEE341BD5B11A00576C7D /* Icon-60@3x.png in Resources */,
+				D2CCEE391BD5B11A00576C7D /* Icon-Small@3x.png in Resources */,
+				D2CCEE371BD5B11A00576C7D /* Icon-Small.png in Resources */,
+				D2CCEE301BD5B11A00576C7D /* Icon-40.png in Resources */,
 				BC73FD2919612C19004A9191 /* Main.storyboard in Resources */,
 				D24D075B1BD3DD10009AF95B /* Default-568h@2x.png in Resources */,
+				D2CCEE551BD5C0FB00576C7D /* Launch Screen.storyboard in Resources */,
+				D2CCEE331BD5B11A00576C7D /* Icon-60@2x.png in Resources */,
 				BC73FD2B19612C19004A9191 /* Images.xcassets in Resources */,
+				D2CCEE321BD5B11A00576C7D /* Icon-40@3x.png in Resources */,
+				D2CCEE311BD5B11A00576C7D /* Icon-40@2x.png in Resources */,
+				D2CCEE381BD5B11A00576C7D /* Icon-Small@2x.png in Resources */,
+				D2CCEE361BD5B11A00576C7D /* Icon-76@2x.png in Resources */,
+				D2CCEE351BD5B11A00576C7D /* Icon-76.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,11 +387,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = SwiftVideoFileFilterer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sunsetlakesoftware.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.OhioVR.SwiftVideoFileFilterer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -349,11 +400,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = SwiftVideoFileFilterer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sunsetlakesoftware.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.OhioVR.SwiftVideoFileFilterer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -17,16 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HPh-dQ-AZ2">
+                                <rect key="frame" x="20" y="642" width="374" height="2"/>
+                            </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHJ-j9-hga">
                                 <rect key="frame" x="183" y="353" width="48" height="30"/>
                                 <state key="normal" title="Filter It"/>
                                 <connections>
-                                    <action selector="doSomething:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NrX-vv-eFs"/>
+                                    <action selector="filterVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0FE-VE-amj"/>
                                 </connections>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HPh-dQ-AZ2">
-                                <rect key="frame" x="20" y="642" width="374" height="2"/>
-                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
