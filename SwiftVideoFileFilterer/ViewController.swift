@@ -17,17 +17,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var movieURL: NSURL!
     var timer: NSTimer!
     
-    
-    
-    
-    
-    
+    @IBOutlet var statusLabel: UILabel!
     
     @IBAction func filterVideo(sender: AnyObject) {
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
         imagePicker.sourceType = .SavedPhotosAlbum //.PhotoLibrary
         imagePicker.mediaTypes = [kUTTypeMovie as String]
         presentViewController(imagePicker, animated: true, completion: nil)
+       
     }
     
  
@@ -35,6 +32,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismissViewControllerAnimated(true, completion: nil)
         let pickedMovieUrl = info[UIImagePickerControllerMediaURL] as? NSURL
         
+         aButton.enabled = false;
         movieFile = GPUImageMovie(URL: pickedMovieUrl)
         pixellateFilter = GPUImagePixellateFilter()
         halfToneFilter = GPUImageHalftoneFilter()
@@ -56,7 +54,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "progress", userInfo: nil, repeats: true)
         progressView.alpha = 1.0
-        
+        statusLabel.alpha = 1.0
         movieWriter.completionBlock = {
             print("Processing Complete!")
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(self.pathToMovie) {
@@ -74,6 +72,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             timer.invalidate()
             progressView.progress = 0
             progressView.alpha = 0
+            statusLabel.alpha = 0
+            aButton.enabled = true;
         }
     }
     
@@ -89,5 +89,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         progressView.progress = 0
         progressView.alpha = 0;
+        statusLabel.alpha = 0.0
+         aButton.enabled = true;
     }
 }

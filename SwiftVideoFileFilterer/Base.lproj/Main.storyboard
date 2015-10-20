@@ -27,11 +27,19 @@
                                     <action selector="filterVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0FE-VE-amj"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Working..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfs-4X-7go">
+                                <rect key="frame" x="168" y="600" width="78" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="HPh-dQ-AZ2" secondAttribute="bottom" constant="92" id="5eL-1o-btf"/>
+                            <constraint firstItem="Vfs-4X-7go" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9yc-ip-dds"/>
                             <constraint firstItem="HPh-dQ-AZ2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="DLN-MG-i5q"/>
+                            <constraint firstItem="HPh-dQ-AZ2" firstAttribute="top" secondItem="Vfs-4X-7go" secondAttribute="bottom" constant="21" id="XtZ-2k-9J2"/>
                             <constraint firstItem="KHJ-j9-hga" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dPJ-yZ-6Qs"/>
                             <constraint firstItem="HPh-dQ-AZ2" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="ltp-Pd-gq5"/>
                             <constraint firstItem="KHJ-j9-hga" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="lun-rz-ZdC"/>
@@ -39,7 +47,9 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="aButton" destination="KHJ-j9-hga" id="Vkt-Fl-etu"/>
                         <outlet property="progressView" destination="HPh-dQ-AZ2" id="DBk-Pv-3Fx"/>
+                        <outlet property="statusLabel" destination="Vfs-4X-7go" id="0ge-jU-Bp2"/>
                         <segue destination="gT2-kl-tFs" kind="show" identifier="playFilteredVideo" id="wJD-If-1H2"/>
                     </connections>
                 </viewController>
