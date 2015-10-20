@@ -13,6 +13,7 @@
 		BC73FD2B19612C19004A9191 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC73FD2A19612C19004A9191 /* Images.xcassets */; };
 		D24D075B1BD3DD10009AF95B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D24D075A1BD3DD10009AF95B /* Default-568h@2x.png */; };
 		D2890A651BD45D670006D068 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2890A641BD45D670006D068 /* VideoViewController.swift */; };
+		D29ADE221BD6D4C6002A62E8 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29ADE211BD6D4C6002A62E8 /* FilterTableViewCell.swift */; };
 		D2BF345B1BD2B4CA003E075A /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BF344C1BD2B2CE003E075A /* GPUImage.framework */; };
 		D2BF345C1BD2B4CA003E075A /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BF344C1BD2B2CE003E075A /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2CCEE301BD5B11A00576C7D /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE261BD5B11A00576C7D /* Icon-40.png */; };
@@ -75,6 +76,7 @@
 		BC73FD2A19612C19004A9191 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D24D075A1BD3DD10009AF95B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D2890A641BD45D670006D068 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		D29ADE211BD6D4C6002A62E8 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		D2BF34431BD2B2CE003E075A /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		D2CCEE261BD5B11A00576C7D /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
 		D2CCEE271BD5B11A00576C7D /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				BC73FD2A19612C19004A9191 /* Images.xcassets */,
 				BC73FD2119612C19004A9191 /* Supporting Files */,
 				D2890A641BD45D670006D068 /* VideoViewController.swift */,
+				D29ADE211BD6D4C6002A62E8 /* FilterTableViewCell.swift */,
 			);
 			path = SwiftVideoFileFilterer;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC73FD2619612C19004A9191 /* ViewController.swift in Sources */,
+				D29ADE221BD6D4C6002A62E8 /* FilterTableViewCell.swift in Sources */,
 				BC73FD2419612C19004A9191 /* AppDelegate.swift in Sources */,
 				D2890A651BD45D670006D068 /* VideoViewController.swift in Sources */,
 			);

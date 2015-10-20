@@ -3,10 +3,16 @@ import GPUImage
 import MobileCoreServices
 
 var urlToFilteredTempVideo = NSURL(fileURLWithPath: "")
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITableViewDelegate  {
     
     @IBOutlet var aButton: UIButton!
     @IBOutlet var progressView: UIProgressView!
+    
+    
+    
+    ////@IBOutlet var tableView: UITableView!
+    var cellContent = ["Sharpen", "Brightness", "Hue", "Saturation"]
+    
     
     let imagePicker = UIImagePickerController()
     var pixellateFilter: GPUImagePixellateFilter!
@@ -17,14 +23,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var movieURL: NSURL!
     var timer: NSTimer!
     
+
     @IBOutlet var statusLabel: UILabel!
+    @IBOutlet var previewImage: UIImageView!
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return cellContent.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
+        cell.textLabel?.text = cellContent[indexPath.row]
+        return cell
+    }
+
+    
+    
     
     @IBAction func filterVideo(sender: AnyObject) {
         imagePicker.allowsEditing = true
-        imagePicker.sourceType = .SavedPhotosAlbum //.PhotoLibrary
+        imagePicker.sourceType = .SavedPhotosAlbum
         imagePicker.mediaTypes = [kUTTypeMovie as String]
         presentViewController(imagePicker, animated: true, completion: nil)
-       
+      
     }
     
  
@@ -32,7 +55,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismissViewControllerAnimated(true, completion: nil)
         let pickedMovieUrl = info[UIImagePickerControllerMediaURL] as? NSURL
         
-         aButton.enabled = false;
+        
+        aButton.setTitle("Process Video", forState: UIControlState.Normal)
+        
+        previewImage.image = previewImageForLocalVideo(pickedMovieUrl!)
+        
+        aButton.enabled = false;
         movieFile = GPUImageMovie(URL: pickedMovieUrl)
         pixellateFilter = GPUImagePixellateFilter()
         halfToneFilter = GPUImageHalftoneFilter()
@@ -65,6 +93,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    
+    //http://stackoverflow.com/questions/8906004/thumbnail-image-of-video
+    func previewImageForLocalVideo(url:NSURL) -> UIImage?
+    {
+        let asset = AVAsset(URL: url)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
+        
+        var time = asset.duration
+        //If possible - take not the first frame (it could be completely black or white on camara's videos)
+        time.value = min(time.value, 2)
+        
+        do {
+            let imageRef = try imageGenerator.copyCGImageAtTime(time, actualTime: nil)
+            return UIImage(CGImage: imageRef)
+        }
+        catch let error as NSError
+        {
+            print("Image generation failed with error \(error)")
+            return nil
+        }
+    }
+    
+    
     func progress() {
         print("progress is = \(movieFile.progress)")
         progressView.progress = movieFile.progress
@@ -74,6 +126,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             progressView.alpha = 0
             statusLabel.alpha = 0
             aButton.enabled = true;
+            aButton.setTitle("Select Video", forState: UIControlState.Normal)
         }
     }
     
@@ -90,6 +143,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         progressView.progress = 0
         progressView.alpha = 0;
         statusLabel.alpha = 0.0
-         aButton.enabled = true;
+        aButton.enabled = true;
     }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        aButton.setTitle("Select Video", forState: UIControlState.Normal)
+    }
+    
 }
