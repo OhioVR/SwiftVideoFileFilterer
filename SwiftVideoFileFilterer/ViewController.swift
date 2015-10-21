@@ -2,16 +2,17 @@ import UIKit
 import GPUImage
 import MobileCoreServices
 
-var urlToFilteredTempVideo = NSURL(fileURLWithPath: "")
+
+var filterPreviewVideoURL: NSURL!
+var videoPreviewURL: NSURL!
 class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITableViewDelegate  {
     
     @IBOutlet var aButton: UIButton!
     @IBOutlet var progressView: UIProgressView!
+    @IBOutlet var statusLabel: UILabel!
+    @IBOutlet var previewImage: UIImageView!
     
-    
-    
-    ////@IBOutlet var tableView: UITableView!
-    var cellContent = ["Sharpen", "Brightness", "Hue", "Saturation"]
+    var cellContent = ["Sharpen", "Brightness", "Hue", "Saturation", "gaussian blur", "pixelate"]
     
     
     let imagePicker = UIImagePickerController()
@@ -20,79 +21,88 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     var movieWriter: GPUImageMovieWriter!
     var movieFile: GPUImageMovie!
     var pathToMovie: String!
-    var movieURL: NSURL!
     var timer: NSTimer!
+    var pickedMovieUrl: NSURL!
+    
+    static let START = "start"
+    static let SELECT = "select image"
+    static let PROCESS = "process image"
+    static var programMode: String!
+    
+    static var previewType: String!
+    static let PREFILTER = "Prefilter"
+    static let POSTFILTER = "Post filter"
+    
     
 
-    @IBOutlet var statusLabel: UILabel!
-    @IBOutlet var previewImage: UIImageView!
-    
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    @IBAction func aButtonPress(sender: AnyObject) {
         
-        return cellContent.count
+        if ViewController.programMode == ViewController.SELECT || ViewController.programMode == ViewController.START {
+            
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .SavedPhotosAlbum
+            imagePicker.mediaTypes = [kUTTypeMovie as String]
+            presentViewController(imagePicker, animated: true, completion: nil)
+            
+        } else if ViewController.programMode == ViewController.PROCESS {
+            aButton.enabled = false;
+            movieFile = GPUImageMovie(URL: pickedMovieUrl)
+            pixellateFilter = GPUImagePixellateFilter()
+            halfToneFilter = GPUImageHalftoneFilter()
+            movieFile.addTarget(halfToneFilter)
+            
+            let tmpdir = NSTemporaryDirectory()
+            pathToMovie = "\(tmpdir)output.mov"
+            
+            unlink(pathToMovie)//unlink deletes a file
+            filterPreviewVideoURL = NSURL.fileURLWithPath(pathToMovie)
+            movieWriter = GPUImageMovieWriter(movieURL: filterPreviewVideoURL, size: CGSizeMake(640, 480))
+            movieWriter.encodingLiveVideo = false;//https://github.com/BradLarson/GPUImage/issues/1108
+            halfToneFilter.addTarget(movieWriter)
+            movieWriter.shouldPassthroughAudio = true
+            movieFile.audioEncodingTarget = movieWriter
+            movieFile.enableSynchronizedEncodingUsingMovieWriter(movieWriter)
+            movieWriter.startRecording()
+            movieFile.startProcessing()
+            
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "progress", userInfo: nil, repeats: true)
+            progressView.alpha = 1.0
+            statusLabel.alpha = 1.0
+            movieWriter.completionBlock = {
+                print("Processing Complete!")
+                if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(self.pathToMovie) {
+                    UISaveVideoAtPathToSavedPhotosAlbum(self.pathToMovie as String, self, "savingCallBack:didFinishSavingWithError:contextInfo:", nil)
+                } else {
+                    print("the file must be bad!")
+                }
+            }
+            
+        }
+        
+        
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = cellContent[indexPath.row]
-        return cell
-    }
-
     
-    
-    
-    @IBAction func filterVideo(sender: AnyObject) {
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .SavedPhotosAlbum
-        imagePicker.mediaTypes = [kUTTypeMovie as String]
-        presentViewController(imagePicker, animated: true, completion: nil)
-      
-    }
-    
- 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         dismissViewControllerAnimated(true, completion: nil)
-        let pickedMovieUrl = info[UIImagePickerControllerMediaURL] as? NSURL
+        pickedMovieUrl = info[UIImagePickerControllerMediaURL] as? NSURL
+        
+        videoPreviewURL = pickedMovieUrl
         
         
-        aButton.setTitle("Process Video", forState: UIControlState.Normal)
-        
-        previewImage.image = previewImageForLocalVideo(pickedMovieUrl!)
-        
-        aButton.enabled = false;
-        movieFile = GPUImageMovie(URL: pickedMovieUrl)
-        pixellateFilter = GPUImagePixellateFilter()
-        halfToneFilter = GPUImageHalftoneFilter()
-        movieFile.addTarget(halfToneFilter)
-        
-        let tmpdir = NSTemporaryDirectory()
-        pathToMovie = "\(tmpdir)output.mov"
-        
-        unlink(pathToMovie)//unlink deletes a file
-        movieURL = NSURL.fileURLWithPath(pathToMovie)
-        movieWriter = GPUImageMovieWriter(movieURL: movieURL, size: CGSizeMake(640, 480))
-        movieWriter.encodingLiveVideo = false;//https://github.com/BradLarson/GPUImage/issues/1108
-        halfToneFilter.addTarget(movieWriter)
-        movieWriter.shouldPassthroughAudio = true
-        movieFile.audioEncodingTarget = movieWriter
-        movieFile.enableSynchronizedEncodingUsingMovieWriter(movieWriter)
-        movieWriter.startRecording()
-        movieFile.startProcessing()
-        
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "progress", userInfo: nil, repeats: true)
-        progressView.alpha = 1.0
-        statusLabel.alpha = 1.0
-        movieWriter.completionBlock = {
-            print("Processing Complete!")
-            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(self.pathToMovie) {
-                UISaveVideoAtPathToSavedPhotosAlbum(self.pathToMovie as String, self, "savingCallBack:didFinishSavingWithError:contextInfo:", nil)
-            } else {
-                print("the file must be bad!")
-            }
+        dispatch_after(0, dispatch_get_main_queue()) {
+            print("test")
+            //we have to do these tasks on the main thread 
+            //otherwise there will be no effect
+            self.previewImage.image = self.previewImageForLocalVideo(self.pickedMovieUrl!)
+            self.aButton.setTitle("Process Video", forState: UIControlState.Normal)
+            
         }
+        ViewController.programMode = ViewController.PROCESS
+        ViewController.previewType = ViewController.PREFILTER
     }
     
+
     
     //http://stackoverflow.com/questions/8906004/thumbnail-image-of-video
     func previewImageForLocalVideo(url:NSURL) -> UIImage?
@@ -127,16 +137,18 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             statusLabel.alpha = 0
             aButton.enabled = true;
             aButton.setTitle("Select Video", forState: UIControlState.Normal)
+            ViewController.programMode = ViewController.SELECT
+            ViewController.previewType = ViewController.POSTFILTER
         }
     }
     
     func savingCallBack(video: NSString, didFinishSavingWithError error:NSError, contextInfo:UnsafeMutablePointer<Void>){
         print("the file has been saved sucessfully!")
-        urlToFilteredTempVideo = movieURL
-        performSegueWithIdentifier("playFilteredVideo", sender: nil)
-    
+        performSegueWithIdentifier("playVideo", sender: nil)
     }
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
@@ -144,11 +156,39 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         progressView.alpha = 0;
         statusLabel.alpha = 0.0
         aButton.enabled = true;
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: Selector("previewMovie"))
+        singleTap.numberOfTapsRequired = 1
+        previewImage.userInteractionEnabled = true
+        previewImage.addGestureRecognizer(singleTap)
+        ViewController.programMode = ViewController.START
+        aButton.setTitle("Select Video", forState: UIControlState.Normal)
+        ViewController.previewType = "nothing"
     }
+    
+    func previewMovie() {
+        if ViewController.programMode != ViewController.START {
+                    performSegueWithIdentifier("playVideo", sender: nil)
+        }
 
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
-        aButton.setTitle("Select Video", forState: UIControlState.Normal)
+        
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cellContent.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
+        cell.textLabel?.text = cellContent[indexPath.row]
+        return cell
+    }
+    
+    
+    
     
 }

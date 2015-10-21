@@ -21,7 +21,13 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
 
         playerVC = AVPlayerViewController()
-        player = AVPlayer(URL: urlToFilteredTempVideo)
+        
+        if ViewController.previewType == ViewController.PREFILTER {
+            player = AVPlayer(URL: videoPreviewURL)
+        } else if ViewController.previewType == ViewController.POSTFILTER {
+            player = AVPlayer(URL: filterPreviewVideoURL)
+        }
+        
         playerVC.player = player
         self.addChildViewController(playerVC)
         self.view.addSubview(playerVC.view)

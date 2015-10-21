@@ -17,16 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press Select Video below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAa-AW-MNO">
+                                <rect key="frame" x="111" y="117" width="193" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HPh-dQ-AZ2">
                                 <rect key="frame" x="20" y="714" width="374" height="2"/>
                             </progressView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHJ-j9-hga">
-                                <rect key="frame" x="183" y="634" width="48" height="30"/>
-                                <state key="normal" title="Filter It"/>
-                                <connections>
-                                    <action selector="filterVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0FE-VE-amj"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Working..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfs-4X-7go">
                                 <rect key="frame" x="168" y="672" width="78" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -57,12 +56,21 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="AlJ-qp-c02"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHJ-j9-hga">
+                                <rect key="frame" x="183" y="634" width="48" height="30"/>
+                                <state key="normal" title="Filter It"/>
+                                <connections>
+                                    <action selector="aButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="adC-Q3-3Cj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KHJ-j9-hga" firstAttribute="centerX" secondItem="Vfs-4X-7go" secondAttribute="centerX" id="2Ub-Uy-cwd"/>
                             <constraint firstItem="Vfs-4X-7go" firstAttribute="centerX" secondItem="HPh-dQ-AZ2" secondAttribute="centerX" id="2cK-CR-kjQ"/>
                             <constraint firstItem="4G2-Vp-dcH" firstAttribute="centerX" secondItem="KHJ-j9-hga" secondAttribute="centerX" id="4yc-4Q-xLQ"/>
+                            <constraint firstItem="AAa-AW-MNO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Css-08-PbQ"/>
+                            <constraint firstItem="AAa-AW-MNO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="97" id="DCI-N5-TIU"/>
                             <constraint firstAttribute="bottom" secondItem="HPh-dQ-AZ2" secondAttribute="bottom" constant="20" symbolic="YES" id="LAi-ri-DeU"/>
                             <constraint firstItem="4G2-Vp-dcH" firstAttribute="leading" secondItem="GxS-qc-nVe" secondAttribute="leading" id="MVN-4a-9dp"/>
                             <constraint firstItem="4G2-Vp-dcH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="235" id="Tfq-vZ-r49"/>
@@ -82,7 +90,7 @@
                         <outlet property="previewImage" destination="GxS-qc-nVe" id="9GB-rS-fZy"/>
                         <outlet property="progressView" destination="HPh-dQ-AZ2" id="DBk-Pv-3Fx"/>
                         <outlet property="statusLabel" destination="Vfs-4X-7go" id="0ge-jU-Bp2"/>
-                        <segue destination="gT2-kl-tFs" kind="show" identifier="playFilteredVideo" id="wJD-If-1H2"/>
+                        <segue destination="gT2-kl-tFs" kind="show" identifier="playVideo" id="wJD-If-1H2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
