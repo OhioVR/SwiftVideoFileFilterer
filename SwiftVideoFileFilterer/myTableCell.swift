@@ -1,16 +1,25 @@
 //
-//  FilterTableViewCell.swift
+//  myTableCell.swift
 //  SwiftVideoFileFilterer
 //
-//  Created by Scott Yannitell on 10/20/15.
+//  Created by Scott Yannitell on 10/22/15.
 //  Copyright © 2015 Scott Yannitell. All rights reserved.
 //
 
 import UIKit
 
-class FilterTableViewCell: UITableViewCell {
+class myTableCell: UITableViewCell {
 
-    @IBOutlet var name: UILabel!
+    
+    //@IBOutlet var label1: UILabel!
+    
+    //@IBOutlet var label2: UILabel!
+    
+    
+    
+    @IBOutlet var filterField: UITextField!
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -11,9 +11,13 @@
 		BC73FD2619612C19004A9191 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC73FD2519612C19004A9191 /* ViewController.swift */; };
 		BC73FD2919612C19004A9191 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC73FD2719612C19004A9191 /* Main.storyboard */; };
 		BC73FD2B19612C19004A9191 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC73FD2A19612C19004A9191 /* Images.xcassets */; };
+		D21D09271BD9A99E001C2A06 /* myTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21D09261BD9A99E001C2A06 /* myTableCell.swift */; };
+		D21D092B1BD9B724001C2A06 /* emptyscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = D21D092A1BD9B724001C2A06 /* emptyscreen.png */; };
+		D21D092D1BD9BA77001C2A06 /* Simulator Screen Shot Oct 19, 2015, 2.01.00 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = D21D092C1BD9BA77001C2A06 /* Simulator Screen Shot Oct 19, 2015, 2.01.00 PM.png */; };
 		D24D075B1BD3DD10009AF95B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D24D075A1BD3DD10009AF95B /* Default-568h@2x.png */; };
 		D2890A651BD45D670006D068 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2890A641BD45D670006D068 /* VideoViewController.swift */; };
-		D29ADE221BD6D4C6002A62E8 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29ADE211BD6D4C6002A62E8 /* FilterTableViewCell.swift */; };
+		D2BE4B7B1BD95A9F009913E7 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2BE4B7A1BD95A9F009913E7 /* Media.xcassets */; };
+		D2BE4B7F1BD96B26009913E7 /* filterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BE4B7E1BD96B26009913E7 /* filterSelectViewController.swift */; };
 		D2BF345B1BD2B4CA003E075A /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BF344C1BD2B2CE003E075A /* GPUImage.framework */; };
 		D2BF345C1BD2B4CA003E075A /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BF344C1BD2B2CE003E075A /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2CCEE301BD5B11A00576C7D /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = D2CCEE261BD5B11A00576C7D /* Icon-40.png */; };
@@ -74,9 +78,13 @@
 		BC73FD2519612C19004A9191 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BC73FD2819612C19004A9191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BC73FD2A19612C19004A9191 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D21D09261BD9A99E001C2A06 /* myTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTableCell.swift; sourceTree = "<group>"; };
+		D21D092A1BD9B724001C2A06 /* emptyscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptyscreen.png; sourceTree = "<group>"; };
+		D21D092C1BD9BA77001C2A06 /* Simulator Screen Shot Oct 19, 2015, 2.01.00 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screen Shot Oct 19, 2015, 2.01.00 PM.png"; sourceTree = "<group>"; };
 		D24D075A1BD3DD10009AF95B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D2890A641BD45D670006D068 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
-		D29ADE211BD6D4C6002A62E8 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		D2BE4B7A1BD95A9F009913E7 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		D2BE4B7E1BD96B26009913E7 /* filterSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = filterSelectViewController.swift; sourceTree = "<group>"; };
 		D2BF34431BD2B2CE003E075A /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		D2CCEE261BD5B11A00576C7D /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
 		D2CCEE271BD5B11A00576C7D /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
@@ -106,6 +114,7 @@
 		BC73FD1519612C19004A9191 = {
 			isa = PBXGroup;
 			children = (
+				D2BE4B7A1BD95A9F009913E7 /* Media.xcassets */,
 				D2CCEE541BD5C0FB00576C7D /* Launch Screen.storyboard */,
 				D2CCEE251BD5B10400576C7D /* icons */,
 				BC73FD2019612C19004A9191 /* SwiftVideoFileFilterer */,
@@ -125,13 +134,16 @@
 		BC73FD2019612C19004A9191 /* SwiftVideoFileFilterer */ = {
 			isa = PBXGroup;
 			children = (
-				BC73FD2319612C19004A9191 /* AppDelegate.swift */,
+				D21D092C1BD9BA77001C2A06 /* Simulator Screen Shot Oct 19, 2015, 2.01.00 PM.png */,
+				D21D092A1BD9B724001C2A06 /* emptyscreen.png */,
 				BC73FD2519612C19004A9191 /* ViewController.swift */,
+				BC73FD2319612C19004A9191 /* AppDelegate.swift */,
 				BC73FD2719612C19004A9191 /* Main.storyboard */,
 				BC73FD2A19612C19004A9191 /* Images.xcassets */,
 				BC73FD2119612C19004A9191 /* Supporting Files */,
 				D2890A641BD45D670006D068 /* VideoViewController.swift */,
-				D29ADE211BD6D4C6002A62E8 /* FilterTableViewCell.swift */,
+				D2BE4B7E1BD96B26009913E7 /* filterSelectViewController.swift */,
+				D21D09261BD9A99E001C2A06 /* myTableCell.swift */,
 			);
 			path = SwiftVideoFileFilterer;
 			sourceTree = "<group>";
@@ -205,6 +217,7 @@
 				TargetAttributes = {
 					BC73FD1D19612C19004A9191 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = M5YRF3VSLS;
 					};
 				};
 			};
@@ -255,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2CCEE341BD5B11A00576C7D /* Icon-60@3x.png in Resources */,
+				D21D092B1BD9B724001C2A06 /* emptyscreen.png in Resources */,
 				D2CCEE391BD5B11A00576C7D /* Icon-Small@3x.png in Resources */,
 				D2CCEE371BD5B11A00576C7D /* Icon-Small.png in Resources */,
 				D2CCEE301BD5B11A00576C7D /* Icon-40.png in Resources */,
@@ -262,8 +276,10 @@
 				D24D075B1BD3DD10009AF95B /* Default-568h@2x.png in Resources */,
 				D2CCEE551BD5C0FB00576C7D /* Launch Screen.storyboard in Resources */,
 				D2CCEE331BD5B11A00576C7D /* Icon-60@2x.png in Resources */,
+				D21D092D1BD9BA77001C2A06 /* Simulator Screen Shot Oct 19, 2015, 2.01.00 PM.png in Resources */,
 				BC73FD2B19612C19004A9191 /* Images.xcassets in Resources */,
 				D2CCEE321BD5B11A00576C7D /* Icon-40@3x.png in Resources */,
+				D2BE4B7B1BD95A9F009913E7 /* Media.xcassets in Resources */,
 				D2CCEE311BD5B11A00576C7D /* Icon-40@2x.png in Resources */,
 				D2CCEE381BD5B11A00576C7D /* Icon-Small@2x.png in Resources */,
 				D2CCEE361BD5B11A00576C7D /* Icon-76@2x.png in Resources */,
@@ -279,9 +295,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC73FD2619612C19004A9191 /* ViewController.swift in Sources */,
-				D29ADE221BD6D4C6002A62E8 /* FilterTableViewCell.swift in Sources */,
 				BC73FD2419612C19004A9191 /* AppDelegate.swift in Sources */,
 				D2890A651BD45D670006D068 /* VideoViewController.swift in Sources */,
+				D21D09271BD9A99E001C2A06 /* myTableCell.swift in Sources */,
+				D2BE4B7F1BD96B26009913E7 /* filterSelectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +408,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SwiftVideoFileFilterer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -404,6 +422,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SwiftVideoFileFilterer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
