@@ -1,24 +1,16 @@
 //
-//  myTableCell.swift
+//  OnlyNameCell.swift
 //  SwiftVideoFileFilterer
 //
-//  Created by Scott Yannitell on 10/22/15.
+//  Created by Scott Yannitell on 10/24/15.
 //  Copyright © 2015 Scott Yannitell. All rights reserved.
 //
 
 import UIKit
 
-class myTableCell: UITableViewCell {
+class OnlyNameCell: UITableViewCell {
 
-    
-    //@IBOutlet var label1: UILabel!
-    
-    //@IBOutlet var label2: UILabel!
-    
-    
-    
     @IBOutlet var filterField: UITextField!
-    
     
     
     override func awakeFromNib() {
