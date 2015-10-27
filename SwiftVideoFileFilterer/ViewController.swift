@@ -9,8 +9,12 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 
     var filters = ["Brightness", "Gamma", "Exposure", "Contrast", "Hue", "Saturation", "Amatorka Filter", "Soft Elegance Filter", "Color Invert Filter", "Grayscale Filter"]
     
-    var pickedTextField: UITextField!
     
+    
+    
+    /*
+     *  UIPickerView Protocol
+     */
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return self.filters.count
     }
@@ -28,19 +32,21 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         self.pickedTextField.resignFirstResponder()
     }
     
+    var pickedTextField: UITextField!
     var filterPicker: UIPickerView = UIPickerView()
+    ///
     
-    struct MyData {
+    struct aFilterS {
         var filterName:String
         var parameters: [AnyObject]
     }
-    
-    var tableData: [MyData]! = []
+    var tableData: [aFilterS]! = []
 
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var previewImage: UIImageView!
     @IBOutlet var theTableView: UITableView!
     var canEditTable = false;
+    var previewUIImage: UIImage!
 
     let imagePicker = UIImagePickerController()
 
@@ -49,6 +55,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     var pathToMovie: String!
     var timer: NSTimer!
     var pickedMovieUrl: NSURL!
+    
+    var previewToBeFilteredTimer: NSTimer! //when a filter changes, stop this timer, start it to run .3 seconds, and then filter the preview
     
     static let START = "start"
     static let SELECT = "select video"
@@ -81,105 +89,89 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func beginProcessing(sender: AnyObject) {
         movieFile = GPUImageMovie(URL: pickedMovieUrl)
         var filterList: [GPUImageOutput] = []
-        var dataList:[String] = []
+
         for filter in tableData {
             switch (filter.filterName){
             case "Brightness":
-                dataList.append(filter.filterName)
                 let myGPUFilter = GPUImageBrightnessFilter()
                 let myParameter = filter.parameters[0] as! CGFloat
                 myGPUFilter.brightness = myParameter
                 filterList.append(myGPUFilter)
                 break
             case "Gamma":
-                dataList.append(filter.filterName)
                 let myGPUFilter = GPUImageGammaFilter()
                 let myParameter = filter.parameters[0] as! CGFloat
                 myGPUFilter.gamma = myParameter
                 filterList.append(myGPUFilter)
                 break
             case "Exposure":
-                dataList.append(filter.filterName)
                 let myGPUFilter = GPUImageExposureFilter()
                 let myParameter = filter.parameters[0] as! CGFloat
                 myGPUFilter.exposure = myParameter
                 filterList.append(myGPUFilter)
                 break
             case "Contrast":
-                dataList.append(filter.filterName)
                 let myGPUFilter = GPUImageContrastFilter()
                 let myParameter = filter.parameters[0] as! CGFloat
                 myGPUFilter.contrast = myParameter
                 filterList.append(myGPUFilter)
                 break
             case "Hue":
-                dataList.append(filter.filterName)
                 let myGPUFilter = GPUImageHueFilter()
                 let myParameter = filter.parameters[0] as! CGFloat
                 myGPUFilter.hue = myParameter
                 filterList.append(myGPUFilter)
                 break
             case "Saturation":
-                dataList.append(filter.filterName)
                 let myGPUFilter = GPUImageSaturationFilter()
                 let myParameter = filter.parameters[0] as! CGFloat
                 myGPUFilter.saturation = myParameter
                 filterList.append(myGPUFilter)
             case "Amatorka Filter":
-                dataList.append(filter.filterName)
                 let myGPUFilter = GPUImageAmatorkaFilter()
                 filterList.append(myGPUFilter)
                 break
                 
             case "Soft Elegance Filter":
-                dataList.append(filter.filterName)
                 let myGPUFilter = GPUImageSoftEleganceFilter()
                 filterList.append(myGPUFilter)
                 break
                 
             case "Color Invert Filter":
-                dataList.append(filter.filterName)
                 let myGPUFilter = GPUImageColorInvertFilter()
                 filterList.append(myGPUFilter)
                 break
                 
             case "Grayscale Filter":
-                dataList.append(filter.filterName)
                 let myGPUFilter = GPUImageGrayscaleFilter()
                 filterList.append(myGPUFilter)
                 break
 
             default :
                 print("no filter")
-                
             }
         }
         
         if (filterList.count < 1){
             print("nothing to filter")
+            //flieble
+            alert("Notice:", message: "There are no filters selected.\n\nChoose Add Filter from the menu")
             return
         }
         
         movieFile.addTarget(filterList[0] as! GPUImageInput)
         
         for var i = 0;i<filterList.count-1; i++ {
-            print("list of filters")
             if filterList[i] is GPUImageFilter {
-                print("1")
                 if filterList[i+1] is GPUImageFilter {
-                    print("2")
                     (filterList[i] as! GPUImageFilter).addTarget(filterList[i+1] as! GPUImageFilter)
                 } else {
-                    print("3")
                     (filterList[i] as! GPUImageFilter).addTarget(filterList[i+1] as! GPUImageFilterGroup)
                 }
             } else {
-                print("4")
                 if filterList[i+1] is GPUImageFilter {
-                   print("5")
                     (filterList[i] as! GPUImageFilterGroup).addTarget(filterList[i+1] as! GPUImageFilter)
                 } else {
-                    print("6")
                     (filterList[i] as! GPUImageFilterGroup).addTarget(filterList[i+1] as! GPUImageFilterGroup)
                 }
             }
@@ -220,11 +212,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
     
     @IBAction func aboutButton(sender: AnyObject) {
-        let alert: UIAlertController = UIAlertController(title: "About:", message: "Developed by Scott Yannitell\nGPUImage developed by Brad Larson.\nIf you need an app developed, contact me at scott@ohiovr.com", preferredStyle: UIAlertControllerStyle.Alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction) in
-        })
-        alert.addAction(defaultAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        let appName = NSBundle.mainBundle().infoDictionary!["CFBundleDisplayName"] as! String
+        alert("About", message: "\(appName)\n\nwritten by Scott Yannitell \n\nImage Filters provided by GPUImage:\n\nA project led and developed by Brad Larson.\n\nGet the source code for this program and GPUImage at github.com\n\nNeed an app developed? call me or txt me at 740 396 5922")
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -242,8 +231,11 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             // handle delete (by removing the data from your array and updating the tableview)
-                tableData.removeAtIndex(indexPath.row)
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableData.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            //fielble
+            tableView.reloadData()
+            updatePreviewImage1()
         }
     }
     
@@ -252,6 +244,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         let item = tableData[fromIndexPath.row]
         tableData.removeAtIndex(fromIndexPath.row)
         tableData.insert(item, atIndex: toIndexPath.row)
+        tableView.reloadData()
+        updatePreviewImage1()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -282,6 +276,14 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             cell.filterField.inputView = filterPicker
             return cell
         case "Soft Elegance Filter":
+            let cell = tableView.dequeueReusableCellWithIdentifier("OnlyNameCell") as! OnlyNameCell
+            cell.filterField.text! = tableData[indexPath.row].filterName
+            cell.filterField.addTarget(self, action:Selector("pressFilterFieldStart:"), forControlEvents: UIControlEvents.EditingDidBegin)
+            cell.filterField.addTarget(self, action:Selector("pressFilterFieldEnd:"), forControlEvents: UIControlEvents.EditingDidEnd)
+            cell.filterField.tag = indexPath.row
+            cell.filterField.inputView = filterPicker
+            return cell
+        case "Color Invert Filter":
             let cell = tableView.dequeueReusableCellWithIdentifier("OnlyNameCell") as! OnlyNameCell
             cell.filterField.text! = tableData[indexPath.row].filterName
             cell.filterField.addTarget(self, action:Selector("pressFilterFieldStart:"), forControlEvents: UIControlEvents.EditingDidBegin)
@@ -377,10 +379,14 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             break;
         }
         
-        //if we got to this point we're screwed
-        print("shouldn't be here!!!!!!!!!!!!")
-        // Return our new cell for display
+        //if we got to this point we're screwed //yeah I'm sure I'm doing it wrong
+        print("shouldn't be here!!!!!!!!!!!! \(filterName)")
         let cell = tableView.dequeueReusableCellWithIdentifier("OnlyNameCell") as! OnlyNameCell
+        cell.filterField.text! = tableData[indexPath.row].filterName
+        cell.filterField.addTarget(self, action:Selector("pressFilterFieldStart:"), forControlEvents: UIControlEvents.EditingDidBegin)
+        cell.filterField.addTarget(self, action:Selector("pressFilterFieldEnd:"), forControlEvents: UIControlEvents.EditingDidEnd)
+        cell.filterField.tag = indexPath.row
+        cell.filterField.inputView = filterPicker
         return cell
     }
     
@@ -390,7 +396,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
     
     func pressFilterFieldEnd(sender:UITextField!){
-        print(sender.tag)
         var params : [AnyObject] = []
         switch(sender.text!){
         case "Brightness":
@@ -412,19 +417,19 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             params.append(1)
             break
         default :
-            print("no params")
+            break
         }
         
-        self.tableData[sender.tag] = MyData(filterName: sender.text!, parameters:params)
+        self.tableData[sender.tag] = aFilterS(filterName: sender.text!, parameters:params)
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.theTableView.reloadData()
+            self.updatePreviewImage1()
         })
-        print("field edit end");
     }
     
     func sliderChanged(sender: UISlider!){
-        print("slider value = \(sender.value)")
         tableData[sender.tag].parameters[0] = sender.value
+        updatePreviewImage1()
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -439,26 +444,48 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             //otherwise there will be no effect
             self.processItButton.enabled = true
             self.saveButton.enabled = false
-            self.previewImage.image = self.previewImageForLocalVideo(videoPreviewURL)
+            
+            self.previewUIImage = self.previewImageForLocalVideo(videoPreviewURL, beginEndRatio: 0.2)
+            self.previewImage.image = self.previewUIImage
+            self.updatePreviewImage1()
         }
         ViewController.programMode = ViewController.PROCESS
         ViewController.previewType = ViewController.PREFILTER
     }
 
     //http://stackoverflow.com/questions/8906004/thumbnail-image-of-video
-    func previewImageForLocalVideo(url:NSURL) -> UIImage?
+    func previewImageForLocalVideo(url:NSURL, beginEndRatio:Float64) -> UIImage?
     {
         let asset = AVAsset(URL: url)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
         
-        var time = asset.duration
+        let time:Int64 = Int64(CMTimeGetSeconds(asset.duration) * beginEndRatio * 1000)
         //If possible - take not the first frame (it could be completely black or white on camara's videos)
-        time.value = min(time.value, 2)
-        
+       // time.value = min(time.value, 2)
+        print(time)
+        let time2:CMTime = CMTimeMake(time,1000)
         do {
-            let imageRef = try imageGenerator.copyCGImageAtTime(time, actualTime: nil)
-            return UIImage(CGImage: imageRef)
+            let imageRef = try imageGenerator.copyCGImageAtTime(time2, actualTime: nil)
+            
+            
+            let image = UIImage(CGImage: imageRef)
+            
+            let size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(0.25 * 0.5, 0.25 * 0.5))
+            let hasAlpha = false
+            let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+            
+            UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+            image.drawInRect(CGRect(origin: CGPointZero, size: size))
+            
+            let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            
+            
+            
+            
+            return scaledImage
         }
         catch let error as NSError
         {
@@ -467,8 +494,125 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
     }
     
+    
+    func updatePreviewImage1() {
+        if (previewUIImage == nil){
+            return
+        }
+        
+        let stillImageSource: GPUImagePicture = GPUImagePicture(image: previewUIImage)
+        
+        
+        //let stillImageFilter: GPUImageSepiaFilter = GPUImageSepiaFilter()
+        //stillImageSource.addTarget(stillImageFilter)
+
+        
+        
+        
+        var filterList: [GPUImageOutput] = []
+        
+        for filter in tableData {
+            switch (filter.filterName){
+            case "Brightness":
+                let myGPUFilter = GPUImageBrightnessFilter()
+                let myParameter = filter.parameters[0] as! CGFloat
+                myGPUFilter.brightness = myParameter
+                filterList.append(myGPUFilter)
+                break
+            case "Gamma":
+                let myGPUFilter = GPUImageGammaFilter()
+                let myParameter = filter.parameters[0] as! CGFloat
+                myGPUFilter.gamma = myParameter
+                filterList.append(myGPUFilter)
+                break
+            case "Exposure":
+                let myGPUFilter = GPUImageExposureFilter()
+                let myParameter = filter.parameters[0] as! CGFloat
+                myGPUFilter.exposure = myParameter
+                filterList.append(myGPUFilter)
+                break
+            case "Contrast":
+                let myGPUFilter = GPUImageContrastFilter()
+                let myParameter = filter.parameters[0] as! CGFloat
+                myGPUFilter.contrast = myParameter
+                filterList.append(myGPUFilter)
+                break
+            case "Hue":
+                let myGPUFilter = GPUImageHueFilter()
+                let myParameter = filter.parameters[0] as! CGFloat
+                myGPUFilter.hue = myParameter
+                filterList.append(myGPUFilter)
+                break
+            case "Saturation":
+                let myGPUFilter = GPUImageSaturationFilter()
+                let myParameter = filter.parameters[0] as! CGFloat
+                myGPUFilter.saturation = myParameter
+                filterList.append(myGPUFilter)
+            case "Amatorka Filter":
+                let myGPUFilter = GPUImageAmatorkaFilter()
+                filterList.append(myGPUFilter)
+                break
+                
+            case "Soft Elegance Filter":
+                let myGPUFilter = GPUImageSoftEleganceFilter()
+                filterList.append(myGPUFilter)
+                break
+                
+            case "Color Invert Filter":
+                let myGPUFilter = GPUImageColorInvertFilter()
+                filterList.append(myGPUFilter)
+                break
+                
+            case "Grayscale Filter":
+                let myGPUFilter = GPUImageGrayscaleFilter()
+                filterList.append(myGPUFilter)
+                break
+                
+            default :
+                break
+            }
+        }
+        
+        if (filterList.count < 1){
+            print("nothing to filter")
+            self.previewImage.image = previewUIImage
+            return
+        }
+        
+        ////movieFile.addTarget(filterList[0] as! GPUImageInput)
+        stillImageSource.addTarget(filterList[0] as! GPUImageInput)
+        
+        
+        for var i = 0;i<filterList.count-1; i++ {
+            if filterList[i] is GPUImageFilter {
+                if filterList[i+1] is GPUImageFilter {
+                    (filterList[i] as! GPUImageFilter).addTarget(filterList[i+1] as! GPUImageFilter)
+                } else {
+                    (filterList[i] as! GPUImageFilter).addTarget(filterList[i+1] as! GPUImageFilterGroup)
+                }
+            } else {
+                if filterList[i+1] is GPUImageFilter {
+                    (filterList[i] as! GPUImageFilterGroup).addTarget(filterList[i+1] as! GPUImageFilter)
+                } else {
+                    (filterList[i] as! GPUImageFilterGroup).addTarget(filterList[i+1] as! GPUImageFilterGroup)
+                }
+            }
+        }
+
+        
+        
+
+        
+        filterList.last!.useNextFrameForImageCapture()
+        
+        
+        stillImageSource.processImage()
+        let currentFilteredVideoFrame: UIImage = filterList.last!.imageFromCurrentFramebuffer()
+        self.previewImage.image = currentFilteredVideoFrame
+    }
+    
+    
     func progress() {
-        print("progress is = \(movieFile.progress)")
         progressView!.progress = movieFile.progress
         if movieFile.progress == 1.0 {
             timer.invalidate()
@@ -485,12 +629,16 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     func savingCallBack(video: NSString, didFinishSavingWithError error:NSError, contextInfo:UnsafeMutablePointer<Void>){
         print("the file has been saved sucessfully!")
-        let alert: UIAlertController = UIAlertController(title: "About:", message: "Your movie has been saved to the Camera Roll.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert("Notice", message: "Your movie has been saved to the Camera Roll.")
+        self.saveButton.enabled = false
+    }
+    
+    func alert(title: String, message: String){
+        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction) in
         })
         alert.addAction(defaultAction)
         self.presentViewController(alert, animated: true, completion: nil)
-        self.saveButton.enabled = false
     }
     
     @IBAction func editFilterTable(sender: AnyObject) {
@@ -504,12 +652,53 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
     }
 
+
+
+    func panShuttle(rec:UIPanGestureRecognizer) {
+        if self.previewUIImage == nil {return}//this is dumb flieble
+        let p:CGPoint = rec.locationInView(self.previewImage)
+        
+        let xVal:Float64 = Float64(p.x / UIScreen.mainScreen().bounds.width)
+        
+        ////print("\(xVal)")
+        
+        self.previewUIImage = self.previewImageForLocalVideo(videoPreviewURL, beginEndRatio: xVal)
+        updatePreviewImage1()
+        //flieble
+        //self.previewImage.image = self.previewUIImage
+        
+        
+        
+        
+        
+        
+        switch rec.state {
+        case .Began:
+            print("began")
+            break
+        default: break
+        }
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        
+        previewImage.userInteractionEnabled = true
+        
         let singleTap = UITapGestureRecognizer(target: self, action: Selector("previewMovie"))
         singleTap.numberOfTapsRequired = 1
-        previewImage.userInteractionEnabled = true
+
+
+        let pan = UIPanGestureRecognizer(target:self, action:"panShuttle:")
+        pan.maximumNumberOfTouches = 1
+        pan.minimumNumberOfTouches = 1
+        previewImage.addGestureRecognizer(pan)
+        
+        
+      
         previewImage.addGestureRecognizer(singleTap)
         ViewController.programMode = ViewController.START
         ViewController.previewType = "nothing"
@@ -552,13 +741,19 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         theTableView.tableFooterView!.hidden = true
         theTableView.backgroundColor = UIColor.lightGrayColor()
         theTableView.rowHeight = 100
+        canEditTable = true
+        theTableView.setEditing(true, animated: false)
+        
+        
         filterPicker.delegate = self
         filterPicker.dataSource = self
+        
+        previewToBeFilteredTimer = NSTimer()
     }
 
     @IBAction func addItem(sender: AnyObject) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.tableData.append(MyData(filterName: "tap to select filter", parameters:[]))
+            self.tableData.append(aFilterS(filterName: "tap to select filter", parameters:[]))
             self.theTableView.reloadData()
             
             //scroll to the bottom

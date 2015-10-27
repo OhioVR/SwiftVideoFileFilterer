@@ -14,29 +14,104 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="GPUImageView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="2000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="emptyscreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="GxS-qc-nVe">
+                                <rect key="frame" x="0.0" y="64" width="375" height="215"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="215" id="pMm-d0-cSl"/>
+                                </constraints>
+                            </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czx-jj-75H">
-                                <rect key="frame" x="0.0" y="193" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="279" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="+" systemItem="add" id="bVI-Km-kra">
+                                    <barButtonItem title="Add Filter" id="dZu-3R-Why">
                                         <connections>
-                                            <action selector="addItem:" destination="BYZ-38-t0r" id="xcJ-jO-DRl"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Y94-sx-OgY"/>
-                                    <barButtonItem systemItem="edit" id="Lty-cu-I0d">
-                                        <connections>
-                                            <action selector="editFilterTable:" destination="BYZ-38-t0r" id="Bsf-xo-8K2"/>
+                                            <action selector="addItem:" destination="BYZ-38-t0r" id="4un-ho-Ba7"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TD-hb-WwH">
+                                <rect key="frame" x="72" y="752" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDB-l3-3YA">
+                                <rect key="frame" x="16" y="751" width="22" height="22"/>
+                                <connections>
+                                    <action selector="aboutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aab-o1-7Nw"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rpi-RT-16p">
+                                <rect key="frame" x="0.0" y="323" width="375" height="344"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OnlyNameCell" rowHeight="91" id="z0L-Bw-zyq" customClass="OnlyNameCell" customModule="SwiftVideoFileFilterer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="91"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z0L-Bw-zyq" id="dbj-Hn-6el">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mWl-ew-kdu">
+                                                    <rect key="frame" x="11" y="30" width="578" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mWl-ew-kdu" firstAttribute="centerX" secondItem="dbj-Hn-6el" secondAttribute="centerX" id="Tdb-pn-LLX"/>
+                                                <constraint firstItem="mWl-ew-kdu" firstAttribute="leading" secondItem="dbj-Hn-6el" secondAttribute="leadingMargin" constant="3" id="r08-Dt-5lW"/>
+                                                <constraint firstItem="mWl-ew-kdu" firstAttribute="centerY" secondItem="dbj-Hn-6el" secondAttribute="centerY" id="zcp-3j-sUa"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="filterField" destination="mWl-ew-kdu" id="avz-gO-LQC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SingleSliderCell" rowHeight="119" id="GuH-DA-m7t" customClass="SingleSliderCell" customModule="SwiftVideoFileFilterer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="119" width="375" height="119"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GuH-DA-m7t" id="Wbe-5Y-dF0">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="118"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tS0-g8-lxC">
+                                                    <rect key="frame" x="11" y="13" width="578" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XWu-ek-ekr">
+                                                    <rect key="frame" x="9" y="63" width="582" height="31"/>
+                                                </slider>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tS0-g8-lxC" firstAttribute="leading" secondItem="Wbe-5Y-dF0" secondAttribute="leadingMargin" constant="3" id="71U-SZ-aFT"/>
+                                                <constraint firstItem="tS0-g8-lxC" firstAttribute="top" secondItem="Wbe-5Y-dF0" secondAttribute="topMargin" constant="5" id="EwV-if-2rc"/>
+                                                <constraint firstItem="XWu-ek-ekr" firstAttribute="leading" secondItem="tS0-g8-lxC" secondAttribute="leading" id="NML-si-jCC"/>
+                                                <constraint firstItem="XWu-ek-ekr" firstAttribute="top" secondItem="tS0-g8-lxC" secondAttribute="bottom" constant="20" id="TZL-ba-SXB"/>
+                                                <constraint firstItem="XWu-ek-ekr" firstAttribute="trailing" secondItem="tS0-g8-lxC" secondAttribute="trailing" id="UBt-8W-5p2"/>
+                                                <constraint firstItem="XWu-ek-ekr" firstAttribute="centerX" secondItem="Wbe-5Y-dF0" secondAttribute="centerX" id="kiM-zZ-3M7"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="filterField" destination="tS0-g8-lxC" id="PT8-vE-3eQ"/>
+                                            <outlet property="slider" destination="XWu-ek-ekr" id="MUg-SH-po6"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="WXq-qI-OsD"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="kEy-lq-IX2"/>
+                                </connections>
+                            </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXm-PW-ehP">
-                                <rect key="frame" x="0.0" y="1956" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="New" id="G5F-xV-CBk">
+                                    <barButtonItem title="Open Clip" id="G5F-xV-CBk">
                                         <connections>
                                             <action selector="newProject:" destination="BYZ-38-t0r" id="6ba-0Y-TSg"/>
                                         </connections>
@@ -61,111 +136,29 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TD-hb-WwH">
-                                <rect key="frame" x="76" y="2085" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDB-l3-3YA">
-                                <rect key="frame" x="20" y="2084" width="22" height="22"/>
-                                <connections>
-                                    <action selector="aboutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aab-o1-7Nw"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="emptyscreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="GxS-qc-nVe">
-                                <rect key="frame" x="0.0" y="20" width="600" height="173"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="173" id="ubk-8Z-6q2"/>
-                                </constraints>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rpi-RT-16p">
-                                <rect key="frame" x="0.0" y="237" width="600" height="1719"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OnlyNameCell" rowHeight="91" id="z0L-Bw-zyq" customClass="OnlyNameCell" customModule="SwiftVideoFileFilterer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="91"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z0L-Bw-zyq" id="dbj-Hn-6el">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mWl-ew-kdu">
-                                                    <rect key="frame" x="11" y="30" width="578" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="mWl-ew-kdu" firstAttribute="centerX" secondItem="dbj-Hn-6el" secondAttribute="centerX" id="Tdb-pn-LLX"/>
-                                                <constraint firstItem="mWl-ew-kdu" firstAttribute="leading" secondItem="dbj-Hn-6el" secondAttribute="leadingMargin" constant="3" id="r08-Dt-5lW"/>
-                                                <constraint firstItem="mWl-ew-kdu" firstAttribute="centerY" secondItem="dbj-Hn-6el" secondAttribute="centerY" id="zcp-3j-sUa"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="filterField" destination="mWl-ew-kdu" id="avz-gO-LQC"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SingleSliderCell" rowHeight="119" id="GuH-DA-m7t" customClass="SingleSliderCell" customModule="SwiftVideoFileFilterer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="119" width="600" height="119"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GuH-DA-m7t" id="Wbe-5Y-dF0">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="118"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tS0-g8-lxC">
-                                                    <rect key="frame" x="11" y="13" width="578" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XWu-ek-ekr">
-                                                    <rect key="frame" x="9" y="63" width="582" height="31"/>
-                                                </slider>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="tS0-g8-lxC" firstAttribute="leading" secondItem="Wbe-5Y-dF0" secondAttribute="leadingMargin" constant="3" id="71U-SZ-aFT"/>
-                                                <constraint firstItem="tS0-g8-lxC" firstAttribute="top" secondItem="Wbe-5Y-dF0" secondAttribute="topMargin" constant="5" id="EwV-if-2rc"/>
-                                                <constraint firstItem="XWu-ek-ekr" firstAttribute="leading" secondItem="tS0-g8-lxC" secondAttribute="leading" id="NML-si-jCC"/>
-                                                <constraint firstItem="XWu-ek-ekr" firstAttribute="top" secondItem="tS0-g8-lxC" secondAttribute="bottom" constant="20" id="TZL-ba-SXB"/>
-                                                <constraint firstItem="XWu-ek-ekr" firstAttribute="trailing" secondItem="tS0-g8-lxC" secondAttribute="trailing" id="UBt-8W-5p2"/>
-                                                <constraint firstItem="XWu-ek-ekr" firstAttribute="centerX" secondItem="Wbe-5Y-dF0" secondAttribute="centerX" id="kiM-zZ-3M7"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="filterField" destination="tS0-g8-lxC" id="PT8-vE-3eQ"/>
-                                            <outlet property="slider" destination="XWu-ek-ekr" id="MUg-SH-po6"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="WXq-qI-OsD"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="kEy-lq-IX2"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="iXm-PW-ehP" secondAttribute="trailing" id="0Mm-of-tIH"/>
-                            <constraint firstItem="iXm-PW-ehP" firstAttribute="leading" secondItem="Rpi-RT-16p" secondAttribute="leading" id="1Tb-qf-uPg"/>
-                            <constraint firstItem="iXm-PW-ehP" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="4oR-nX-tEY"/>
-                            <constraint firstItem="3TD-hb-WwH" firstAttribute="leading" secondItem="IDB-l3-3YA" secondAttribute="trailing" constant="34" id="C71-SF-SX5"/>
-                            <constraint firstItem="iXm-PW-ehP" firstAttribute="top" secondItem="Rpi-RT-16p" secondAttribute="bottom" id="Jfu-9k-Y2j"/>
-                            <constraint firstItem="IDB-l3-3YA" firstAttribute="bottom" secondItem="3TD-hb-WwH" secondAttribute="bottom" id="Pf7-aA-aes"/>
-                            <constraint firstItem="GxS-qc-nVe" firstAttribute="leading" secondItem="czx-jj-75H" secondAttribute="leading" id="UCv-mk-Ai6"/>
-                            <constraint firstItem="Rpi-RT-16p" firstAttribute="trailing" secondItem="iXm-PW-ehP" secondAttribute="trailing" id="d0T-Y6-kCm"/>
-                            <constraint firstItem="Rpi-RT-16p" firstAttribute="trailing" secondItem="czx-jj-75H" secondAttribute="trailing" id="fe8-no-92n"/>
-                            <constraint firstItem="Rpi-RT-16p" firstAttribute="top" secondItem="czx-jj-75H" secondAttribute="bottom" id="hUn-2t-fpD"/>
-                            <constraint firstItem="GxS-qc-nVe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="20" id="mxw-57-SOB"/>
-                            <constraint firstItem="czx-jj-75H" firstAttribute="trailing" secondItem="GxS-qc-nVe" secondAttribute="trailing" id="q4G-dD-Xmd"/>
-                            <constraint firstItem="IDB-l3-3YA" firstAttribute="top" secondItem="wfy-db-euE" secondAttribute="bottom" constant="84" id="qzr-T9-CSu"/>
-                            <constraint firstItem="GxS-qc-nVe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="r5J-1b-tTY"/>
-                            <constraint firstItem="IDB-l3-3YA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="uvD-F3-liV"/>
-                            <constraint firstItem="czx-jj-75H" firstAttribute="top" secondItem="GxS-qc-nVe" secondAttribute="bottom" id="waF-Tg-svj"/>
-                            <constraint firstItem="czx-jj-75H" firstAttribute="leading" secondItem="Rpi-RT-16p" secondAttribute="leading" id="y3q-yB-6Cy"/>
+                            <constraint firstItem="iXm-PW-ehP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="6gr-eM-sUT"/>
+                            <constraint firstItem="Rpi-RT-16p" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="7lW-Bl-Sde"/>
+                            <constraint firstItem="GxS-qc-nVe" firstAttribute="leading" secondItem="czx-jj-75H" secondAttribute="leading" id="AeS-9K-lz4"/>
+                            <constraint firstItem="iXm-PW-ehP" firstAttribute="leading" secondItem="GxS-qc-nVe" secondAttribute="leading" id="D1s-cv-dhE"/>
+                            <constraint firstItem="GxS-qc-nVe" firstAttribute="trailing" secondItem="iXm-PW-ehP" secondAttribute="trailing" id="DKt-7J-Put"/>
+                            <constraint firstItem="3TD-hb-WwH" firstAttribute="bottom" secondItem="IDB-l3-3YA" secondAttribute="bottom" id="JPv-FP-1Yp"/>
+                            <constraint firstItem="Rpi-RT-16p" firstAttribute="top" secondItem="czx-jj-75H" secondAttribute="bottom" id="JqL-nZ-Th1"/>
+                            <constraint firstItem="GxS-qc-nVe" firstAttribute="top" secondItem="iXm-PW-ehP" secondAttribute="bottom" id="MAC-7X-UYq"/>
+                            <constraint firstItem="czx-jj-75H" firstAttribute="trailing" secondItem="GxS-qc-nVe" secondAttribute="trailing" id="WFE-ZW-Tep"/>
+                            <constraint firstItem="czx-jj-75H" firstAttribute="leading" secondItem="Rpi-RT-16p" secondAttribute="leading" id="XNs-hp-7uw"/>
+                            <constraint firstItem="IDB-l3-3YA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Xe0-2L-01r"/>
+                            <constraint firstItem="czx-jj-75H" firstAttribute="trailing" secondItem="Rpi-RT-16p" secondAttribute="trailing" id="hIJ-oL-Z1Z"/>
+                            <constraint firstItem="3TD-hb-WwH" firstAttribute="leading" secondItem="IDB-l3-3YA" secondAttribute="trailing" constant="34" id="mHc-UB-KMb"/>
+                            <constraint firstItem="czx-jj-75H" firstAttribute="top" secondItem="GxS-qc-nVe" secondAttribute="bottom" id="mMZ-ye-oZL"/>
+                            <constraint firstItem="iXm-PW-ehP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="opn-NK-d1o"/>
+                            <constraint firstAttribute="trailing" secondItem="czx-jj-75H" secondAttribute="trailing" id="quS-e1-Nd8"/>
+                            <constraint firstItem="IDB-l3-3YA" firstAttribute="top" secondItem="wfy-db-euE" secondAttribute="bottom" constant="84" id="tQv-pe-Yto"/>
                         </constraints>
                     </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="2000"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="aboutButton" destination="WYc-KH-kxr" id="41J-6U-K8D"/>
                         <outlet property="newButton" destination="G5F-xV-CBk" id="irK-wZ-mux"/>
@@ -179,7 +172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="469" y="291"/>
+            <point key="canvasLocation" x="468.5" y="290.5"/>
         </scene>
         <!--Video View Controller-->
         <scene sceneID="kvl-aW-S2G">
