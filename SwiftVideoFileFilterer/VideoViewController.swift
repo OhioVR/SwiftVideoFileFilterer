@@ -38,4 +38,15 @@ class VideoViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        //let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+       // UIDevice.currentDevice().setValue(value, forKey: "orientation")
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    
 }
